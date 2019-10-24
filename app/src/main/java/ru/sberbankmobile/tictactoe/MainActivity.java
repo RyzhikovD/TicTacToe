@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView mCirclePoints;
     private TextView mCrossPoints;
+    private TextView mWinnerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
         mCirclePoints = findViewById(R.id.circle_points);
         mCrossPoints = findViewById(R.id.cross_points);
+
+        mWinnerView = findViewById(R.id.winner);
 
         for (final ImageButton button : mButtons) {
             button.setOnClickListener(new View.OnClickListener() {
@@ -59,16 +62,16 @@ public class MainActivity extends AppCompatActivity {
             case CIRCLE:
                 int points = Integer.parseInt(mCirclePoints.getText().toString());
                 mCirclePoints.setText(String.valueOf(points + 1));
-                startNewGame();
+                startNewGame(TicTacToeField.Figure.CIRCLE);
                 break;
             case CROSS:
                 points = Integer.parseInt(mCrossPoints.getText().toString());
                 mCrossPoints.setText(String.valueOf(points + 1));
-                startNewGame();
+                startNewGame(TicTacToeField.Figure.CROSS);
                 break;
             case NONE:
                 if (mField.isFull()) {
-                    startNewGame();
+                    startNewGame(TicTacToeField.Figure.NONE);
                 }
                 break;
         }
@@ -88,11 +91,36 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void startNewGame() {
+    private void startNewGame(TicTacToeField.Figure winner) {
         mField = new TicTacToeField(3);
         mFigure = TicTacToeField.Figure.CROSS;
         for (ImageButton button : mButtons) {
             button.setImageResource(android.R.color.transparent);
         }
+
+        String winnerText;
+        switch (winner) {
+            case NONE:
+                winnerText = "Ничья!";
+                break;
+            case CROSS:
+                winnerText = "Крестики выиграли!";
+                break;
+            case CIRCLE:
+                winnerText = "Нолики выиграли!";
+                break;
+            default:
+                winnerText = "";
+                break;
+        }
+
+        mWinnerView.setText(winnerText);
+        mWinnerView.setVisibility(View.VISIBLE);
+
+        mWinnerView.postDelayed(new Runnable() {
+            public void run() {
+                mWinnerView.setVisibility(View.INVISIBLE);
+            }
+        }, 3000);
     }
 }
