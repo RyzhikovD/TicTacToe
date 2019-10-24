@@ -2,4 +2,8 @@
     <string name="app_name">TicTacToe</string>
     <string name="image_button">Cell</string>
     <string name="zero">0</string>
+    <string name="draw">Ничья!</string>
+    <string name="cross_win">Крестики выиграли!</string>
+    <string name="circle_win">Нолики выиграли!</string>
+    <string name="empty_string" />
 </resources>

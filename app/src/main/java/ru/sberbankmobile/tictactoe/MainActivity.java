@@ -101,16 +101,16 @@ public class MainActivity extends AppCompatActivity {
         String winnerText;
         switch (winner) {
             case NONE:
-                winnerText = "Ничья!";
+                winnerText = getResources().getString(R.string.draw);
                 break;
             case CROSS:
-                winnerText = "Крестики выиграли!";
+                winnerText = getResources().getString(R.string.cross_win);
                 break;
             case CIRCLE:
-                winnerText = "Нолики выиграли!";
+                winnerText = getResources().getString(R.string.circle_win);
                 break;
             default:
-                winnerText = "";
+                winnerText = getResources().getString(R.string.empty_string);
                 break;
         }
 
